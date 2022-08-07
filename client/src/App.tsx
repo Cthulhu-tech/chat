@@ -1,5 +1,7 @@
+import { Home } from "./page/home";
+
 export const App = () => {
 
-  return <>init</>
+  return <Home/>
 
 }

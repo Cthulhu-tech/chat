@@ -1,17 +1,28 @@
-const express = require('express');
-const http = require('http');
-const app = express();
+const ServerStart = require('./src/server');
+const app = require('express')();
+require('dotenv').config();
 
-const server = http.createServer(app);
+const io = ServerStart(app);
 
 app.get('/', (req, res) => {
 
-  res.send('<h1>Hello world</h1>');
+  res.end('work');
 
 });
 
-server.listen(3000, () => {
+io.use((socket, next) => {
+  
+  console.log(...socket)
+  next();
+  
+});
 
-  console.log('listening on *:3000');
+io.on('connection', (socket) => {
+
+  socket.on("message", msg => {
+
+    console.log(msg);
+
+  });
 
 });
