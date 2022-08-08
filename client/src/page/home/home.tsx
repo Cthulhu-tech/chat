@@ -32,7 +32,7 @@ export const Home = () => {
 
         };
 
-    },[]);
+    },[jwt]);
 
     const sendMessage = () => {
 
