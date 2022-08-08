@@ -8,17 +8,17 @@ import { Home } from "./page/home/home";
 export const App = () => {
 
   return <BrowserRouter>
-  <Routes>
-  <Route element={<Layout/>}>
-    <Route element={<ProtectedRouter/>}>
-      <Route path="/" element={<Home/>}>
+          <Routes>
+          <Route element={<Layout/>}>
+            <Route element={<ProtectedRouter/>}>
+              <Route path="/" element={<Home/>}>
 
-      </Route>
-      <Route path="/login" element={<Login />}/>
-      <Route path="/registration" element={<Registration />}/>
-    </Route>
-  </Route>
-</Routes>
-</BrowserRouter>
+              </Route>
+              <Route path="/login" element={<Login />}/>
+              <Route path="/registration" element={<Registration />}/>
+            </Route>
+          </Route>
+        </Routes>
+        </BrowserRouter>
 
 }
