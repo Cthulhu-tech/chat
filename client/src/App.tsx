@@ -1,6 +1,7 @@
 import { ProtectedRouter } from './components/protected/protected';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Registration } from './page/registration/registration';
+import { SocketConnection } from './components/socket/socket';
 import { Layout } from './components/layout/layout';
 import { Login } from './page/login/login';
 import { Home } from "./page/home/home";
@@ -11,8 +12,8 @@ export const App = () => {
           <Routes>
           <Route element={<Layout/>}>
             <Route element={<ProtectedRouter/>}>
-              <Route path="/" element={<Home/>}>
-
+              <Route element={<SocketConnection/>}>
+                <Route path="/" element={<Home/>}/>
               </Route>
               <Route path="/login" element={<Login />}/>
               <Route path="/registration" element={<Registration />}/>
