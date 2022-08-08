@@ -15,7 +15,7 @@ export const CheckCookie = () => {
 
     useEffect(() => { FetchData('refresh'); },[]);
     useEffect(() => { 
-
+        
         if(data && !error) {
 
             dispatch(updateToken({user: {
@@ -27,7 +27,7 @@ export const CheckCookie = () => {
 
         }
 
-     }, [data, load]);
+     }, [load]);
 
     if(load) return <Loading/>
     if(error) return <Error error={error}/>

@@ -9,18 +9,14 @@ export const ProtectedRouter = () => {
     const location = useLocation();
     const jwt = useSelector((state:ReduxStore) => state.jwt.user.jwt);
 
-    useEffect(() => { }, [jwt])
+    useEffect(() => {},[]);
 
-    if(jwt === null){
-        
-        return <CheckCookie />
+    if(jwt === null) return <CheckCookie />
 
-    }else{
+    if(location.pathname === '/login' || location.pathname === '/registration') return <Navigate to="/" replace state={{ from: location }}/>
 
-        if(location.pathname === '/login' || location.pathname === '/registration') return <Navigate to="/"/>
+    console.log(jwt, location)
 
-        return <Outlet/>
-
-    }
+    return <Outlet/>
 
 }
