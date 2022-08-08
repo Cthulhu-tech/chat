@@ -1,8 +1,8 @@
-const sendRefreshToken = require("../utils/jwt/sendRefresh");
-const sendAccessToken = require("../utils/jwt/sendAccess");
-const createRefreshToken = require("../utils/jwt/refresh");
-const createAccessToken = require("../utils/jwt/access");
-const connectDB = require("../utils/db/connection");
+const sendRefreshToken = require("../../utils/jwt/sendRefresh");
+const sendAccessToken = require("../../utils/jwt/sendAccess");
+const createRefreshToken = require("../../utils/jwt/refresh");
+const createAccessToken = require("../../utils/jwt/access");
+const connectDB = require("../../utils/db/connection");
 const {compare} = require("bcrypt");
 
 const login = async (req, res) => {

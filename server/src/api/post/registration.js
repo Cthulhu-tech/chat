@@ -1,4 +1,4 @@
-const connectDB = require("../utils/db/connection");
+const connectDB = require("../../utils/db/connection");
 const {hash} = require("bcrypt");
 
 const regist = async (req, res) => {

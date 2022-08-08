@@ -27,16 +27,23 @@ io.use((socket, next) => {
 
   }catch (e){
 
-    console.log(socket.handshake.auth.jwt)
+    console.log(socket.handshake.auth.jwt);
 
   }
 
 });
 
 io.on('connection', (socket) => {
-  console.log('connection')
-  socket.on("message", msg => {
 
+  socket.on('disconnect', () => {
+    console.log('disconect')
+    socket.disconnect(0);
+  
+  });
+
+  socket.on("message", msg => {
+    console.log( socket.client.conn.server.clientsCount);
+    console.log(socket.handshake.auth)
     console.log(msg);
 
   });

@@ -1,7 +1,7 @@
-const sendRefreshToken = require("../utils/jwt/sendRefresh");
-const createRefreshToken = require("../utils/jwt/refresh");
-const createAccessToken = require("../utils/jwt/access");
-const connectDB = require("../utils/db/connection");
+const sendRefreshToken = require("../../utils/jwt/sendRefresh");
+const createRefreshToken = require("../../utils/jwt/refresh");
+const createAccessToken = require("../../utils/jwt/access");
+const connectDB = require("../../utils/db/connection");
 const {verify} = require("jsonwebtoken");
 
 const refresh = async (request, response) => {
