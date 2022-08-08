@@ -17,7 +17,6 @@ const ServerStart = (app) => {
         cors: {
 
             origin: process.env.ORIGIN,
-            methods: ["GET", "POST"]
 
         }
 
