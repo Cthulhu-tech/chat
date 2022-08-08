@@ -1,12 +1,16 @@
+import { ReduxStore } from "../../interface/redux";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
-
-const socket = io("http://localhost:4000");
 
 export const Home = () => {
 
+    const jwt = useSelector((store:ReduxStore) => store.jwt.user.jwt);
+
+    const socket = io("http://localhost:4000",{auth: {jwt: jwt}});
+
     const [isConnected, setIsConnected] = useState(socket.connected);
-    console.log(isConnected)
+
     useEffect(() => {
         
         socket.on('connection', () => {
