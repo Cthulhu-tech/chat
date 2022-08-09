@@ -5,6 +5,7 @@ import { SocketConnection } from './components/socket/socket';
 import { Layout } from './components/layout/layout';
 import { Login } from './page/login/login';
 import { Home } from "./page/home/home";
+import { Room } from './page/room/room';
 
 export const App = () => {
 
@@ -14,6 +15,7 @@ export const App = () => {
             <Route element={<ProtectedRouter/>}>
               <Route element={<SocketConnection/>}>
                 <Route path="/" element={<Home/>}/>
+                <Route path="/room/:id" element={<Room/>}/>
               </Route>
               <Route path="/login" element={<Login />}/>
               <Route path="/registration" element={<Registration />}/>

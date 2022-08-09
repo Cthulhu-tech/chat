@@ -14,8 +14,23 @@ export type JwtType = {
 
 }
 
+export type Room = {
+
+    id: number;
+    name: string;
+    user: string;
+
+}
+
+export type RoomStore = {
+
+    room: null | Room[]
+
+}
+
 export type ReduxStore = {
 
-    jwt: JwtType
+    jwt: JwtType;
+    room: RoomStore;
 
 }
