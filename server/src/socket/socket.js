@@ -31,12 +31,23 @@ class Socket {
             socket.on('disconnect', () => socket.disconnect(0));
             socket.on("room", (msg) => require('./room')(msg, socket));
             socket.on("message", (msg) => require('./message')(msg, socket));
+
+            socket.on('create', (room) => {
+                
+                socket.join(room);
+                socket.on('new_message_in_room', () => {
+
+                    console.log('f')
+
+                })
+            
+            });
             
             socket.on('allData_room', () => require('./allData_room')(socket, this.io));
             socket.on('allData_message', () => require('./allData_message')(socket));
             
             socket.on('new_room', (msg) => require('./new_room')(msg, socket, this.io));
-            socket.on('new_message', (msg) => require('./socket/new_message')(msg, socket));
+            socket.on('new_message', (msg) => require('./new_message')(msg, this.io));
             
             socket.on('delete_room', (msg) => require('./delete_room')(msg, socket));
             socket.on('delete_message', (msg) => require('./delete_message')(msg, socket));

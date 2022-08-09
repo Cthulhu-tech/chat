@@ -4,6 +4,7 @@ const sendRefreshToken = (response, token) => {
 
         httpOnly: true,
         path: '/refresh',
+        expires: new Date(Date.now() + 432000)
 
     });
 

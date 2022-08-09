@@ -1,6 +1,6 @@
-const data_message = async (msg, socket) => {
+const data_message = async (msg, io) => {
 
-    socket.emit('new_message', "its`s new message");
+    io.emit('new_message', "its`s new message");
 
 }
 
