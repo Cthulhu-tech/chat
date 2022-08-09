@@ -1,7 +1,7 @@
 const cookieParser = require('cookie-parser');
+const socket = require('./src/socket/socket');
 const ServerStart = require('./src/server');
 const bodyParser = require('body-parser');
-const {verify}  = require('jsonwebtoken');
 const express = require('express');
 require('dotenv').config();
 const app = express();
@@ -17,35 +17,4 @@ app.post('/regist', (req, res) => require('./src/api/post/registration')(req, re
 app.post('/lagout', (req, res) => require('./src/api/post/lagout')(req, res));
 app.post('/refresh', (req, res) => require('./src/api/post/refresh')(req, res));
 
-io.use((socket, next) => {
-
-  try {
-      
-    verify(socket.handshake.auth.jwt, process.env.ACCESS_TOKEN_SECRET);
-
-    next();
-
-  }catch (e){
-
-    console.log(socket.handshake.auth.jwt);
-
-  }
-
-});
-
-io.on('connection', (socket) => {
-
-  socket.on('disconnect', () => {
-    console.log('disconect')
-    socket.disconnect(0);
-  
-  });
-
-  socket.on("message", msg => {
-    console.log( socket.client.conn.server.clientsCount);
-    console.log(socket.handshake.auth)
-    console.log(msg);
-
-  });
-
-});
+new socket(io).connection();
