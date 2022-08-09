@@ -39,7 +39,7 @@ export const SocketConnection = () => {
 
     },[jwt, setSocket]);
 
-    return <SocketContext.Provider value={socket ? socket : null}>
+    return <SocketContext.Provider value={socket as Socket}>
         <Outlet/>
     </SocketContext.Provider>
 
