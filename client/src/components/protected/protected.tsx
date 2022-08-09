@@ -11,11 +11,9 @@ export const ProtectedRouter = () => {
 
     useEffect(() => {},[]);
 
+    if((location.pathname === '/login' || location.pathname === '/registration') && jwt) return <Navigate to="/" replace/>
+
     if(jwt === null) return <CheckCookie />
-
-    if(location.pathname === '/login' || location.pathname === '/registration') return <Navigate to="/" replace state={{ from: location }}/>
-
-    console.log(jwt, location)
 
     return <Outlet/>
 
