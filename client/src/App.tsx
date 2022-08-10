@@ -15,7 +15,7 @@ export const App = () => {
             <Route element={<ProtectedRouter/>}>
               <Route element={<SocketConnection/>}>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/room/:id" element={<Room/>}/>
+                <Route path="/room/:id" element={<Room />}/>
               </Route>
               <Route path="/login" element={<Login />}/>
               <Route path="/registration" element={<Registration />}/>

@@ -17,7 +17,6 @@ export const SocketConnection = () => {
     useEffect(() => {
 
         const socket = io("http://localhost:4000",{auth: {jwt: jwt}, transports: ['websocket'], upgrade: false});
-
         setSocket(socket);
 
         socket.emit('allData_room');

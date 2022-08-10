@@ -29,6 +29,7 @@ export const Room = () => {
             if(socket){
 
                 socket.removeAllListeners('new_message_in_room');
+                socket.removeAllListeners('room_message');
                 socket.emit('leave', id);
 
             }
