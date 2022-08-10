@@ -32,12 +32,7 @@ class Socket {
             socket.on("message", (msg) => require('./message')(msg, socket));
 
             socket.on('join', (room) => require('./room')(room, socket, this.io));
-            socket.on('leave', (room) =>{
-
-                socket.leave(room);
-                console.log('leave', socket.rooms, 'count', this.io.engine.clientsCount)
-        
-            });
+            socket.on('leave', (room) => socket.leave(room));
             
             socket.on('allData_room', () => require('./allData_room')(socket, this.io));
             socket.on('allData_message', () => require('./allData_message')(socket));
