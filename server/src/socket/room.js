@@ -1,8 +1,14 @@
-const room = (msg, socket) => {
+const room = (room, socket, io) => {
 
-    console.log(msg, 'room');
+    socket.join(room);
+    
+    console.log('leave', socket.rooms, 'count', io.engine.clientsCount);
 
-    socket.emit('update_room');
+    socket.on('room_message', (data) => {
+        console.log('1')
+        io.to(data.id).emit('new_message_in_room', data.msg);
+
+    });
 
 }
 

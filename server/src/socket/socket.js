@@ -29,18 +29,14 @@ class Socket {
         this.io.on('connection', (socket) => {
         
             socket.on('disconnect', () => socket.disconnect(0));
-            socket.on("room", (msg) => require('./room')(msg, socket));
             socket.on("message", (msg) => require('./message')(msg, socket));
 
-            socket.on('create', (room) => {
-                
-                socket.join(room);
-                socket.on('new_message_in_room', () => {
+            socket.on('join', (room) => require('./room')(room, socket, this.io));
+            socket.on('leave', (room) =>{
 
-                    console.log('f')
-
-                })
-            
+                socket.leave(room);
+                console.log('leave', socket.rooms, 'count', this.io.engine.clientsCount)
+        
             });
             
             socket.on('allData_room', () => require('./allData_room')(socket, this.io));
