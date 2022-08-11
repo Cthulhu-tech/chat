@@ -30,9 +30,15 @@ class Room extends Socket{
 
     }
 
-    _message(data) {
+    async _message(data) {
+        
+        const { userId, iat, exp } = this._userInfo();
 
-        this.io.to(data.id).emit('new_message_in_room', data.msg);
+        await this.database('INSERT INTO message (room, user_id, message) VALUES (?, ?, ?)', [data.id, 1, data.msg]);
+
+        const user = await this.database('SELECT login FROM user WHERE id = ?', [userId]);
+
+        this.io.to(data.id).emit('new_message_in_room', {id: Math.floor((Math.random() * 1000000) + 1) , msg: data.msg, user: user[0].login});
 
     }
 
