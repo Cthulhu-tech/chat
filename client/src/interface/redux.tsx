@@ -28,9 +28,31 @@ export type RoomStore = {
 
 }
 
+export type MsgUser = {
+
+    msg: string
+
+}
+
+export type Msg = {
+
+    id: number;
+    msg: string;
+    user: string;
+    
+}
+
+export type AllMessage = {
+
+    msg: Msg[]
+
+}
+
 export type ReduxStore = {
 
     jwt: JwtType;
     room: RoomStore;
+    userMsg: MsgUser;
+    allMsg: AllMessage;
 
 }
