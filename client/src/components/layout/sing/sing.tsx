@@ -1,6 +1,6 @@
 import { updateToken } from '../../../redux/store/jwt';
 import { ReduxStore } from '../../../interface/redux';
-import { useFetch } from '../../../hook/useFetch';
+import { useFetch } from '../../../context/hook/useFetch';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';

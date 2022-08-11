@@ -1,4 +1,4 @@
-import { formResponse, inputData } from "../interface/input";
+import { formResponse, inputData } from "../../interface/input";
 import { useState } from "react";
 
 export const useForm = (url: string) => {

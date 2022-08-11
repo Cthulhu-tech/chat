@@ -1,6 +1,6 @@
 import { PasswordInput } from "../../components/input/password";
 import { Switch } from "../../switch/switch";
-import { useForm } from "../../hook/useForm";
+import { useForm } from "../../context/hook/useForm";
 import { useEffect } from "react";
 
 export const Registration = () => {

@@ -1,6 +1,6 @@
 import { Navigate, useLocation, Outlet } from 'react-router';
 import { updateToken } from "../../redux/store/jwt";
-import { useFetch } from '../../hook/useFetch';
+import { useFetch } from '../../context/hook/useFetch';
 import { Loading } from '../loading/loading';
 import { useDispatch } from "react-redux";
 import { Error } from '../error/error';

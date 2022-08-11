@@ -8,41 +8,27 @@ export const Room = () => {
 
     const socket = useContext(SocketContext);
 
+    const newMessage = () => socket.emit('room_message', {id, msg:"message"});
+
     useEffect(() => {
 
         const sendNewMessage = (msg: string) => {
-            
-            console.log(msg);
+
+            console.log(msg)
     
         }
 
-        if(socket){
-
-            socket.emit('join', id);
-
-            socket.on('new_message_in_room', sendNewMessage);
-
-        }
+        socket.emit('join', id);
+        socket.on('new_message_in_room', sendNewMessage);
 
         return () => {
 
-            if(socket){
-
-                socket.removeAllListeners('new_message_in_room');
-                socket.removeAllListeners('room_message');
-                socket.emit('leave', id);
-
-            }
+            socket.removeListener('new_message_in_room', sendNewMessage);
+            socket.emit('leave', id);
 
         };
 
-    },[socket]);
-
-    const newMessage = () => {
-
-        socket && socket.emit('room_message', {id, msg:"message"},)
-
-    }
+    },[]);
 
     return <div onClick={newMessage}>room {id}</div>
 
