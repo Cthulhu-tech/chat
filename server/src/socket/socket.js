@@ -1,3 +1,4 @@
+const db = require('../utils/db/connection');
 const { verify } = require('jsonwebtoken');
 
 class Socket {
@@ -5,6 +6,20 @@ class Socket {
     constructor(io){
 
         this.io = io;
+
+    }
+
+    _userInfo() {
+
+      try {
+
+        return verify(this.socket.handshake.auth.jwt, process.env.ACCESS_TOKEN_SECRET);
+
+      }catch(e){
+
+        return null;
+
+      }
 
     }
 
@@ -25,6 +40,18 @@ class Socket {
         }
       
       });
+
+    }
+
+    async database (query, params = []) {
+
+      const connection = await db();
+
+      const data = await connection.query(query, params);
+
+      connection.end();
+
+      return data[0];
 
     }
 

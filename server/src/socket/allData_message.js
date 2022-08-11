@@ -1,6 +1,12 @@
-const allData_message = async (socket) => {
+const db = require('../utils/db/connection');
 
-    socket.emit('allData_message', "get you all data in message");
+const allData_message = async (socket, id) => {
+
+    const connection = await db();
+
+    const all_msg = await connection.query('CALL `sp_get_all_msg`(?)', [+id]);
+
+    socket.emit('allData_message', all_msg[0][0]);
 
 }
 
