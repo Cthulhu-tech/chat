@@ -1,5 +1,7 @@
+const Connection = require('./src/socket/connection/connection');
+const Room = require('./src/socket/room/room');
 const cookieParser = require('cookie-parser');
-const socket = require('./src/socket/socket');
+const Socket = require('./src/socket/socket');
 const ServerStart = require('./src/server');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -17,4 +19,5 @@ app.post('/regist', (req, res) => require('./src/api/post/registration')(req, re
 app.post('/lagout', (req, res) => require('./src/api/post/lagout')(req, res));
 app.post('/refresh', (req, res) => require('./src/api/post/refresh')(req, res));
 
-new socket(io).connection();
+new Socket(io);
+new Connection(io).connection();
