@@ -1,5 +1,4 @@
 const Connection = require('./src/socket/connection/connection');
-const Room = require('./src/socket/room/room');
 const cookieParser = require('cookie-parser');
 const Socket = require('./src/socket/socket');
 const ServerStart = require('./src/server');
