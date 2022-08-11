@@ -1,35 +1,40 @@
+import { MsgContent } from "../../components/msgContent/msgContent";
+import { Message } from "../../components/input/message";
 import { SocketContext } from "../../context/socket";
+import { ReduxStore } from "../../interface/redux";
 import { useContext, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Room = () => {
 
     const {id} = useParams();
-
     const socket = useContext(SocketContext);
+    const msg = useSelector((store: ReduxStore) => store.userMsg.msg);
 
-    const newMessage = () => socket.emit('room_message', {id, msg:"message"});
+    const newMessage = () => socket.emit('room_message', {id, msg});
+
+    useEffect(() => {},[msg]);
 
     useEffect(() => {
 
-        const sendNewMessage = (msg: string) => {
-
-            console.log(msg)
-    
-        }
-
         socket.emit('join', id);
-        socket.on('new_message_in_room', sendNewMessage);
 
         return () => {
 
-            socket.removeListener('new_message_in_room', sendNewMessage);
             socket.emit('leave', id);
 
         };
 
     },[]);
 
-    return <div onClick={newMessage}>room {id}</div>
+
+    return <section>
+        <MsgContent/>
+        <div>
+            <Message/>
+            <button onClick={newMessage}>send message</button>
+        </div>
+    </section>
 
 }
