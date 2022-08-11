@@ -25,10 +25,9 @@ class Connection extends Room {
         socket.on('disconnect', () => socket.disconnect(0));
         socket.on("message", (msg) => require('../message')(msg, socket));
         
-        socket.on('allData_message', () => require('../allData_message')(socket));
         socket.on('allData_room', () => require('../allData_room')(socket, this.io));
+        socket.on('allData_message', (id) => require('../allData_message')(socket, id));
         
-        socket.on('new_message', (msg) => require('../new_message')(msg, this.io));
         socket.on('new_room', (msg) => require('../new_room')(msg, socket, this.io));
         
         socket.on('delete_room', (msg) => require('../delete_room')(msg, socket));
