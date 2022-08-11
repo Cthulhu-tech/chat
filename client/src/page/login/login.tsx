@@ -1,6 +1,6 @@
 import { PasswordInput } from "../../components/input/password";
 import { updateToken } from "../../redux/store/jwt";
-import { useForm } from "../../context/hook/useForm";
+import { useForm } from "../../hook/useForm";
 import { Switch } from "../../switch/switch";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
