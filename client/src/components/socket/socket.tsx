@@ -1,4 +1,4 @@
-import { newRoomData } from "../../redux/store/all_room";
+import { newRoomData } from "../../redux/store/allRoom";
 import { SocketContext } from "../../context/socket";
 import { ReduxStore } from "../../interface/redux";
 import { useSelector } from "react-redux";
