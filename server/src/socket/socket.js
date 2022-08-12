@@ -9,6 +9,12 @@ class Socket {
 
     }
 
+    _jwtUpdate(packet) {
+
+      this.socket.emit('update_jwt', packet);
+
+    }
+
     _userInfo() {
 
       try {
@@ -26,7 +32,7 @@ class Socket {
     _verify() {
 
       this.io.use((socket, next) => {
-
+        console.log(this.io.engine.clientsCount)
         try {
             
           verify(socket.handshake.auth.jwt, process.env.ACCESS_TOKEN_SECRET);
@@ -35,7 +41,7 @@ class Socket {
       
         }catch (e){
       
-          console.log(socket.handshake.auth.jwt);
+          socket.disconnect(0);
       
         }
       
@@ -52,6 +58,22 @@ class Socket {
       connection.end();
 
       return data[0];
+
+    }
+
+    async _checkConnection(packet, next) {
+
+      try{
+        
+        await verify(this.socket.handshake.auth.jwt, process.env.ACCESS_TOKEN_SECRET);
+
+        next();
+
+      }catch(e){
+
+        this._jwtUpdate(packet);
+
+      }
 
     }
 
