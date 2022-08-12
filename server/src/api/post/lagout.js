@@ -1,8 +1,30 @@
-const lagout = (req, res) => {
+const connectDB = require("../../utils/db/connection");
 
-    res.clearCookie('refreshtoken', { path: '/refresh' });
+const lagout = async (request, response) => {
 
-    return res.status(200).json({message: 'lagout'});
+    try{
+
+        const token = request?.cookies?.refreshtoken;
+
+        if(!!token){
+    
+            const connection = await connectDB();
+    
+            await connection.query('DELETE FROM jwt WHERE jwt = ?', [token]);
+
+            await connection.end();
+
+            response.clearCookie('refreshtoken', { path: '/' });
+    
+            response.status(200).json({message: 'lagout'});
+        
+        }
+
+    }catch(err){
+
+        response.status(500).json({message: 'lagout'});
+
+    }
 
 }
 

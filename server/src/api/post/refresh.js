@@ -10,8 +10,7 @@ const refresh = async (request, response) => {
       
       const token = request?.cookies?.refreshtoken;
 
-
-      if (!!!token) return response.json({ accesstoken: null });
+      if (!!!token) return response.status(401).json({ accesstoken: null });
   
       let payload = null;
 
@@ -21,24 +20,30 @@ const refresh = async (request, response) => {
 
       } catch (err) {
 
-        return response.send({ accesstoken: null });
+        if(!!token) await connection.query('DELETE FROM jwt WHERE jwt = ?', [token]);
+
+        return response.status(401).send({ accesstoken: null });
   
       }
 
       const connection = await connectDB();
   
+      const jwt = await connection.query('SELECT * FROM jwt WHERE user_id = ? and jwt = ?', [payload.userId, token]);
+      
       const user = await connection.query('SELECT * FROM user WHERE id = ?', [payload.userId]);
 
       if (!user[0][0]) return response.send({ accesstoken: null });
 
-      if (user[0][0].jwt !== token)
-        return response.json({ accesstoken: null });
+      if (jwt[0].length === 0 || jwt[0][0].jwt !== token)
+        return response.status(401).json({ accesstoken: null });
   
-      const accesstoken = await createAccessToken(+user[0][0].id, "15m");
+      const accesstoken = await createAccessToken(user[0][0].id, "1m");
 
-      const refreshtoken = await createRefreshToken(+user[0][0].id, "7d");
+      const refreshtoken = await createRefreshToken(user[0][0].id, "7d");
   
-      await connection.query('UPDATE user SET jwt = ? WHERE id = ?', [refreshtoken, payload.userId]);
+      await connection.query('DELETE FROM jwt WHERE jwt = ?', [token]);
+
+      await connection.query('INSERT INTO jwt (user_id, jwt) VALUES (?, ?)', [payload.userId, refreshtoken]);
 
       const user_info = await connection.query('SELECT * FROM user WHERE id = ?', [payload.userId]);
   

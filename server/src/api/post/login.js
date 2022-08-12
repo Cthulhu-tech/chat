@@ -11,7 +11,8 @@ const login = async (req, res) => {
 
         const { login, password } = req.body;
 
-        if(login === undefined || password === undefined || login.length > 54 || password.length > 255 || login.length === 0 || password.length === 0) res.status(403).end({"message": "Invalid login or password"});
+        if(login === undefined || password === undefined || login.length > 54 || password.length > 255 || login.length === 0 || password.length === 0) 
+            res.status(403).end({"message": "Invalid login or password"});
 
         const connection = await connectDB();
 
@@ -31,10 +32,30 @@ const login = async (req, res) => {
 
             }
 
-            const accesstoken = await createAccessToken(+user[0][0].id, '15m');
-            const refreshtoken = await createRefreshToken(+user[0][0].id, '7d');
+            const accesstoken = await createAccessToken(user[0][0].id, '15m');
+            const refreshtoken = await createRefreshToken(user[0][0].id, '7d');
 
-            await connection.query('UPDATE user SET jwt = ? WHERE login = ?', [refreshtoken, login]);
+            const jwt = await connection.query('SELECT * FROM jwt WHERE user_id = ?', [user[0][0].id]);
+
+            if(jwt[0].length > 0){
+
+                jwt[0].forEach((token) => {
+
+                    try{
+
+                        verify(token.jwt, process.env.REFRESH_TOKEN_SECRET);
+    
+                    }catch(err){
+
+                        connection.query('DELETE FROM jwt WHERE jwt = ?', [token.jwt]);
+    
+                    }
+
+                });
+
+            }
+
+            await connection.query('INSERT INTO jwt (user_id, jwt) VALUES (?, ?)', [user[0][0].id, refreshtoken]);
 
             await connection.end();
 
