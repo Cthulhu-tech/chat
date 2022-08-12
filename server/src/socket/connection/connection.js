@@ -22,6 +22,8 @@ class Connection extends Room {
 
     _handlerConnection(socket) {
 
+        socket.use((packet, next) => this._checkConnection(packet, next));
+
         socket.on('disconnect', () => socket.disconnect(0));
         socket.on("message", (msg) => require('../message')(msg, socket));
         
