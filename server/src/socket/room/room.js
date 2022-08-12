@@ -18,9 +18,12 @@ class Room extends Socket{
 
     }
 
-    _join(room) {
+    async _join(room) {
 
-        this.socket.join(room);
+        const rooms = await this.database('SELECT * FROM room WHERE id = ?', [room]);
+
+        if(rooms.length === 1)
+            this.socket.join(room);
 
     }
 
@@ -31,8 +34,8 @@ class Room extends Socket{
     }
 
     async _message(data) {
-        
-        const { userId, iat, exp } = this._userInfo();
+
+        const { userId } = this._userInfo();
 
         await this.database('INSERT INTO message (room, user_id, message) VALUES (?, ?, ?)', [data.id, 1, data.msg]);
 
