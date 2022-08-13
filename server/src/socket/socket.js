@@ -73,6 +73,8 @@ class Socket {
 
         this._jwtUpdate(packet);
 
+        this.socket.disconnect(0);
+
       }
 
     }
