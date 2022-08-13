@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Авг 12 2022 г., 00:56
+-- Время создания: Авг 14 2022 г., 00:53
 -- Версия сервера: 8.0.30-0ubuntu0.20.04.2
 -- Версия PHP: 7.4.3
 
@@ -63,6 +63,36 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `jwt`
+--
+
+CREATE TABLE `jwt` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `jwt` char(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `jwt`
+--
+
+INSERT INTO `jwt` (`id`, `user_id`, `jwt`) VALUES
+(464, 2, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY2MDQyNzI3NiwiZXhwIjoxNjYxMDMyMDc2fQ.AIKEt0X7ZO4GfICljEUc1UI94WImBjVd9RGSY68zOtE');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `mail`
+--
+
+CREATE TABLE `mail` (
+  `user_id` int NOT NULL,
+  `mail` char(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `message`
 --
 
@@ -72,14 +102,6 @@ CREATE TABLE `message` (
   `user_id` int NOT NULL,
   `message` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Дамп данных таблицы `message`
---
-
-INSERT INTO `message` (`id`, `room`, `user_id`, `message`) VALUES
-(30, 2, 1, 'privet'),
-(31, 1, 1, 'wow, chat work!');
 
 -- --------------------------------------------------------
 
@@ -110,21 +132,33 @@ INSERT INTO `room` (`id`, `name`, `user_id`) VALUES
 CREATE TABLE `user` (
   `id` int NOT NULL,
   `login` char(55) NOT NULL,
-  `password` char(255) NOT NULL,
-  `jwt` char(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+  `password` char(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `user`
 --
 
-INSERT INTO `user` (`id`, `login`, `password`, `jwt`) VALUES
-(1, '123', '$2b$10$f5k2MNIb3DVeojSowhMW2Olpcnf1a7Nc7ctGQcuWJlpSwT3.h7fQC', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY2MDI1NDYxMSwiZXhwIjoxNjYwODU5NDExfQ.XSBSinnTZqWkHrE5yPvbLReHifAVh71CcuRYsmKrd9I'),
-(2, '12', '$2b$10$Nw1LP3e9Hk3SeeQ.3a22PeCiIbOXKGdoJ.vftBrWszRjh7es2i7qy', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY2MDIzMzkwMSwiZXhwIjoxNjYwODM4NzAxfQ.YdA7cop0ll6Rd0iQnjWhtHrSY57CyTNvzhRvWn4zd4c');
+INSERT INTO `user` (`id`, `login`, `password`) VALUES
+(1, '123', '$2b$10$f5k2MNIb3DVeojSowhMW2Olpcnf1a7Nc7ctGQcuWJlpSwT3.h7fQC'),
+(2, '12', '$2b$10$Nw1LP3e9Hk3SeeQ.3a22PeCiIbOXKGdoJ.vftBrWszRjh7es2i7qy');
 
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `jwt`
+--
+ALTER TABLE `jwt`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `mail`
+--
+ALTER TABLE `mail`
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Индексы таблицы `message`
@@ -152,10 +186,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `jwt`
+--
+ALTER TABLE `jwt`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=465;
+
+--
 -- AUTO_INCREMENT для таблицы `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
 
 --
 -- AUTO_INCREMENT для таблицы `room`
@@ -172,6 +212,18 @@ ALTER TABLE `user`
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `jwt`
+--
+ALTER TABLE `jwt`
+  ADD CONSTRAINT `jwt_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `mail`
+--
+ALTER TABLE `mail`
+  ADD CONSTRAINT `mail_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `message`
