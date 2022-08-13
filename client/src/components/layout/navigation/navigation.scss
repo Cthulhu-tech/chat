@@ -1,0 +1,24 @@
+@import '../../../style/color.scss';
+
+.navigation { 
+
+    grid-row: 1;
+    width: 100%;
+    display: flex;
+    grid-column: 2 / 4;
+    align-items: center;
+    background-color: white;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+
+}
+
+.navigation-handler{
+
+    height: 2px;
+    width: 30px;
+    margin: 0 10px;
+    background: #000;
+    box-shadow: 0 -6px #000, 0 6px #000;
+
+}
