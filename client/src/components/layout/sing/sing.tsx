@@ -14,11 +14,9 @@ export const Sing = () => {
 
     const Lagout = () =>  FetchData('lagout');
 
-    
-
     useEffect(() => {
 
-        if(data){
+        if(data && !error){
 
             dispatch(updateToken({user: {
 
