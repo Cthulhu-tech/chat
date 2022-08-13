@@ -48,11 +48,18 @@ export type AllMessage = {
 
 }
 
+export type Emit = {
+
+    emit: string[] | null;
+
+}
+
 export type ReduxStore = {
 
     jwt: JwtType;
     room: RoomStore;
     userMsg: MsgUser;
     allMsg: AllMessage;
+    emit: Emit;
 
 }
