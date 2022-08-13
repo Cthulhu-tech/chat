@@ -1,0 +1,39 @@
+@import '../../style/color.scss';
+
+.container-room {
+
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    &:hover{
+
+        color: white;
+        background-color: $grayHover;
+
+    }
+
+}
+
+.description {
+
+    font-size: 14px;
+    color: $gray100;
+    text-align: start;
+    text-decoration: none;
+
+}
+
+.container-img {
+
+    margin: 5px;
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 10px;
+    background-color: $green200;
+    border: 1px solid $green100;
+
+}

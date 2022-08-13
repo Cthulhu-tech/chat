@@ -1,16 +1,13 @@
 import { Room } from "../../interface/redux";
 import { NavLink } from "react-router-dom";
+import './room.scss';
 
 export const RoomContainer = (room: Room) => {
 
-    return <section>
-        <p>Комната: 
-            <NavLink to={`/room/${room.id}`}>
-                {room.name}
-            </NavLink>
-        </p>
-        <p>Id комнаты: {room.id}</p>
-        <p>создатель: {room.user}</p>
-    </section>
+    return <NavLink className="description container-room text" to={`/room/${room.id}`}>
+        <div className="container-img"></div>
+        {room.name}
+    </NavLink>
+
 
 }
