@@ -47,7 +47,7 @@ class Room extends Socket{
 
         const { userId } = this._userInfo();
 
-        await this.database('INSERT INTO message (room, user_id, message) VALUES (?, ?, ?)', [data.id, 1, data.msg]);
+        await this.database('INSERT INTO message (room, user_id, message) VALUES (?, ?, ?)', [data.id, userId, data.msg]);
 
         const user = await this.database('SELECT login FROM user WHERE id = ?', [userId]);
 
