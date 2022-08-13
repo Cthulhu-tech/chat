@@ -5,7 +5,7 @@ import { Loading } from "../loading/loading";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Error } from "../error/error";
+import { ErrorComponent } from "../error/error";
 
 export const ProtectedRouter = () => {
 
@@ -52,7 +52,7 @@ export const ProtectedRouter = () => {
 
     },[jwt]);
 
-    if(error) return <Error error={error}/>
+    if(error) return <ErrorComponent error={error}/>
 
     if(load && !!!jwt) return <Loading/>
 
