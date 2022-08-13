@@ -1,4 +1,6 @@
-import { Socket } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import { createContext } from "react";
 
-export const SocketContext = createContext<Socket>({} as Socket);
+export const socket = io("http://localhost:4000",{transports: ['websocket'], upgrade: false});
+
+export const SocketContext = createContext<Socket>(socket);
