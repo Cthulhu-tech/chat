@@ -9,7 +9,7 @@ export const useFetch = (method: string = 'POST') => {
     const FetchData = (url: string) => {
 
         fetch(process.env.REACT_APP_SERVER + url, {
-            method,
+            method: method,
             mode: 'cors',
             redirect: 'follow',
             credentials: "include",
