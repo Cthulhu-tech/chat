@@ -1,6 +1,6 @@
 import { socket, SocketContext } from "../../context/socket";
 import { newRoomData } from "../../redux/store/allRoom";
-import { setEmit } from "../../redux/store/lastEmit";
+import { deleteEmit, setEmit } from "../../redux/store/lastEmit";
 import { updateToken } from "../../redux/store/jwt";
 import { ReduxStore } from "../../interface/redux";
 import { useSelector } from "react-redux";
@@ -36,6 +36,8 @@ export const SocketConnection = () => {
         if(emit){
 
             socket.emit(emit[0], emit[1]);
+
+            dispatch(deleteEmit());
 
         }
 
