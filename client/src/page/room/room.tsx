@@ -11,8 +11,12 @@ export const Room = () => {
     const {id} = useParams();
     const socket = useContext(SocketContext);
     const msg = useSelector((store: ReduxStore) => store.userMsg.msg);
+    const jwt = useSelector((store:ReduxStore) => store.jwt.user.jwt);
 
-    const newMessage = () => socket.emit('room_message', {id, msg});
+    const newMessage = () => {
+        
+            console.log(socket)
+        socket.emit('room_message', {id, msg});}
 
     useEffect(() => {},[msg]);
 
@@ -26,7 +30,7 @@ export const Room = () => {
 
         };
 
-    },[]);
+    },[socket, jwt]);
 
 
     return <section>
