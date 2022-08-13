@@ -22,8 +22,18 @@ class Room extends Socket{
 
         const rooms = await this.database('SELECT * FROM room WHERE id = ?', [room]);
 
-        if(rooms.length === 1)
+        if(rooms.length === 1){
+
             this.socket.join(room);
+
+        }else{
+
+            this.socket.emit('room_not_found');
+
+            this.socket.disconnect(0);
+
+        }
+            
 
     }
 
