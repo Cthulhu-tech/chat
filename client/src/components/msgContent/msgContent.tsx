@@ -13,8 +13,6 @@ export const MsgContent = () => {
     const socket = useContext(SocketContext);
     const msg = useSelector((store: ReduxStore) => store.allMsg.msg);
 
-    useEffect(() => {},[msg]);
-
     useEffect(() => {socket.emit('allData_message', id)},[id]);
 
     useEffect(() => {
@@ -29,7 +27,7 @@ export const MsgContent = () => {
 
         };
 
-    },[]);
+    },[socket]);
 
     return <div>
         {msg.map((msg) => {
