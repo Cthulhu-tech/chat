@@ -4,11 +4,25 @@
 
     width: 100%;
     display: flex;
+    transition: .5s;
     grid-row: 1 / 4;
+    overflow: hidden;
     grid-column: 1 / 2;
     align-items: center;
     flex-direction: column;
     background-color: $gray300;
+
+    &>div>a {
+
+        transition: 0.2s;
+
+    }
+
+    &>div>.active {
+
+        background-color: $grayHover;
+
+    }
 
 }
 
@@ -28,5 +42,15 @@
     align-items: flex-start;
     justify-content: space-evenly;
     border-bottom: 2px solid $gray200;
+
+}
+
+.wrapper-all {
+
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    flex-direction: column;
 
 }
