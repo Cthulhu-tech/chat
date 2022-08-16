@@ -36,7 +36,7 @@ export const Room = () => {
 
     if(found) return <ErrorComponent error={'Такой комнаты не существует'}/>
 
-    return <section className="room-chat shadow-rigth">
+    return <section className="room-chat">
         <MsgContent/>
     </section>
 
