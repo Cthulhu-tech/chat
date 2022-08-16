@@ -54,6 +54,12 @@ export type Emit = {
 
 }
 
+export type Navigation = {
+
+    open: boolean;
+
+}
+
 export type ReduxStore = {
 
     jwt: JwtType;
@@ -61,5 +67,6 @@ export type ReduxStore = {
     userMsg: MsgUser;
     allMsg: AllMessage;
     emit: Emit;
+    navigation: Navigation;
 
 }
