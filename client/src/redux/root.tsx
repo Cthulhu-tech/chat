@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
+import { navigationStore } from "./store/navigation";
 import { userMessageStore } from "./store/message";
 import { AllMsgStore } from "./store/allMessage";
 import { EmitStore } from "./store/lastEmit";
@@ -11,7 +12,8 @@ export const rootReducer = combineReducers({
     room: AllRoom,
     userMsg: userMessageStore,
     allMsg: AllMsgStore,
-    emit: EmitStore
+    emit: EmitStore,
+    navigation: navigationStore
 });
 
 export type AppDispatch = typeof store.dispatch
