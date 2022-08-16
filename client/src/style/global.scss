@@ -1,3 +1,5 @@
+@import '../style/color.scss';
+
 * {
 
     margin: 0;
@@ -6,18 +8,32 @@
 
 }
 
-#root {
+.root {
 
     display: grid;
     height: 100vh;
+    overflow: hidden;
     justify-items: center;
-    justify-content: center;
-    grid-template-columns: 1fr 4fr;
+    justify-content: start;
+    transition: all 1s ease;
     grid-template-rows: 60px 1fr 60px;
     grid-template-areas: 
       "aside navigation navigation"
       "aside . ."
       "aside footer footer";
+
+}
+
+.open {
+
+    grid-template-columns: clamp(150px, 100%, 230px) 1fr;
+
+}
+
+.close {
+
+    overflow-x: hidden;
+    grid-template-columns: 50px 1fr;
 
 }
 
@@ -53,5 +69,34 @@
     text-align: start;
     font-weight: bold;
     width: calc(100% - 20px);
+
+}
+
+
+* {
+
+    scrollbar-width: auto;
+    scrollbar-color: #141a15 #ffffff;
+
+}
+
+
+*::-webkit-scrollbar {
+
+    width: 8px;
+
+}
+
+*::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+*::-webkit-scrollbar-thumb {
+    overflow: overlay;
+    background-color: $green200;
+    border-radius: 0px;
+    border: 1px solid #ffffff;
 
 }
