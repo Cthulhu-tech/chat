@@ -3,6 +3,7 @@ import { ReduxStore } from '../../interface/redux';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import './message.scss';
 
 export const Message = () => {
 
@@ -14,6 +15,6 @@ export const Message = () => {
 
     useEffect(() => {},[msg]);
 
-    return <input type="text" value={msg} name={msg} onChange={msgHandler}/>
+    return <input type="text" className="form-control-message" value={msg} onChange={msgHandler}/>
 
 }
