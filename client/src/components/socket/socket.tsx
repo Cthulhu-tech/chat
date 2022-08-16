@@ -12,6 +12,7 @@ export const SocketConnection = () => {
 
     const emit = useSelector((store:ReduxStore) => store.emit.emit);
     const jwt = useSelector((store:ReduxStore) => store.jwt.user.jwt);
+    const active = useSelector((store: ReduxStore) => store.navigation.open);
 
     const dispatch = useDispatch();
 
@@ -61,7 +62,9 @@ export const SocketConnection = () => {
     },[jwt]);
 
     return <SocketContext.Provider value={socket}>
-        <Outlet/>
+        <div className={active ? "open root" : "close root"}>
+            <Outlet/>
+        </div>
     </SocketContext.Provider>
 
 
